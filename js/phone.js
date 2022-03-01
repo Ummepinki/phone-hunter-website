@@ -21,12 +21,16 @@ const displaySearchResult = data => {
         div.classList.add('col');
         div.innerHTML = `
                <div class="card h-100">
-                   <img src="${data.image}" class="card-img-top" alt="...">
+                   <img class="w-50" src="${data.image}" class="card-img-top" alt="...">
                    <div class="card-body">
                       <h5 class="card-title">${data.phone_name}</h5>
                       <p class="card-text">${data.brand}</p>
+                      <div class="button">
+                      <button onclick="details()" class="btn btn-outline-secondary">Detail</button>
+                      </div>
                  </div>
            </div>
+          
        `;
         searchResult.appendChild(div);
     })
