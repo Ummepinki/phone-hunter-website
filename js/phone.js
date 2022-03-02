@@ -1,11 +1,11 @@
+document.getElementById('error-message').style.display = 'none';
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
 
     // clear data
     searchField.value = '';
-
-
+    document.getElementById('error-message').style.display = 'none';
 
 
     //load data
@@ -14,9 +14,14 @@ const searchPhone = () => {
 
     fetch(url)
         .then(res => res.json())
-        .then(data => displaySearchResult(data.data));
+        .then(data => displaySearchResult(data.data))
+        .catch(error => displayError(error));
 
 
+}
+
+const displayError = error => {
+    document.getElementById('error-message').style.display = 'block';
 }
 const displaySearchResult = data => {
     // console.log(data);
@@ -43,7 +48,7 @@ const displaySearchResult = data => {
     })
 
 }
-
+// load details data
 const details = (id) => {
     // console.log(id);
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
