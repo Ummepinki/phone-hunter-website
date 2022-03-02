@@ -2,32 +2,36 @@ document.getElementById('error-message').style.display = 'none';
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     document.getElementById('spinner').style.display = 'none';
+    document.getElementById('error-message').style.display = 'none';
     const searchText = searchField.value;
 
     // clear data
     searchField.value = '';
-
+    document.getElementById('spinner').style.display = 'block';
     //load data
 
     const url = ` https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     console.log(url);
+
     fetch(url)
         .then(res => res.json())
-        .then(data => displaySearchResult(data.data))
-        .catch(error => displayError(error));
+        .then(data => {
+            console.log(data);
+            console.log('123');
+            document.getElementById('spinner').style.display = 'none';
+            if (data.data && data.data.length > 0) {
+                displaySearchResult(data.data);
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        })
+        .catch(error => displayError());
 
 
-    //spinner
-    if (data.data == null) {
-        document.getElementById('spinner').style.display = 'block';
-    } else {
-        displaySearchResult(data.data);
-        document.getElementById('spinner').style.display = 'none';
-    }
 
 
 }
-const displayError = error => {
+const displayError = () => {
     document.getElementById('error-message').style.display = 'none';
 }
 
