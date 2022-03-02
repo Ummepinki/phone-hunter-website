@@ -6,17 +6,17 @@ const searchPhone = () => {
 
     // clear data
     searchField.value = '';
-    document.getElementById('error-message').style.display = 'none';
-
 
     //load data
-    const url = ` https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-    // console.log(url);
 
+    const url = ` https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+    console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => displaySearchResult(data.data))
         .catch(error => displayError(error));
+
+
     //spinner
     if (data.data == null) {
         document.getElementById('spinner').style.display = 'block';
@@ -27,12 +27,13 @@ const searchPhone = () => {
 
 
 }
-
 const displayError = error => {
-    document.getElementById('error-message').style.display = 'block';
+    document.getElementById('error-message').style.display = 'none';
 }
+
+
 const displaySearchResult = data => {
-    // console.log(data);
+    console.log(data);
     data = data.slice(0, 20);
     const searchResult = document.getElementById('search-result');
     data.forEach(data => {
